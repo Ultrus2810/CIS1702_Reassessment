@@ -2,32 +2,30 @@ import csv
 import os 
 from datetime import datetime 
  
-# GLOBAL VARIABLES 
+# GLOBAL VARIABLES
+# Try to remove these
 STUDENT_FILE = "students.csv" 
 students = [] 
- 
+
 def load_data(): 
     """Loads student data from CSV file.""" 
     # BUG WARNING: Logic here seems fragile 
     global students 
-    # If file doesn't exist, we should probably handle that... currently it 
-crashes. 
+    # If file doesn't exist, we should probably handle that... currently it crashes. 
     with open(STUDENT_FILE, 'r') as file: 
         reader = csv.reader(file) 
         for row in reader: 
             # simple format: ID, Name, Score 
-            students.append({'id': row[0], 'name': row[1], 'score': 
-int(row[2])}) 
+            students.append({'id': row[0], 'name': row[1], 'score': int(row[2])}) 
     print("Data loaded successfully.") 
  
 def save_data(): 
     """Saves student data to CSV file.""" 
-    # BUG WARNING: Check the file mode carefully 
+    # BUG WARNING: Check the file mode carefully
     with open(STUDENT_FILE, 'r') as file:  
         writer = csv.writer(file) 
         for student in students: 
-            writer.writerow([student['id'], student['name'], 
-student['score']]) 
+            writer.writerow([student['id'], student['name'], student['score']]) 
     print("Data saved.") 
  
  
@@ -61,9 +59,7 @@ def view_students():
     print("-" * 50) 
     for s in students: 
         result = determine_grade(s['score']) 
-        print(f"{s['id']:<10} {s['name']:<20} {s['score']:<10} 
- 
-{result:<10}") 
+        print(f"{s['id']:<10} {s['name']:<20} {s['score']:<10} {result:<10}") 
  
 def main_menu(): 
     while True: 

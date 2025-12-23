@@ -1,4 +1,5 @@
-123001,Alice Smith,75 
-123002,Bob Jones,32 
-123003,Charlie Brown,55 
-123004,Diana Prince,88
+# Convert to dictionary
+123001, "Alice Smith", 75 
+123002, "Bob Jones", 32 
+123003, "Charlie Brown", 55 
+123004, "Diana Prince", 88

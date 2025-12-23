@@ -1,5 +1,23 @@
 # Convert to dictionary
-123001, "Alice Smith", 75 
-123002, "Bob Jones", 32 
-123003, "Charlie Brown", 55 
-123004, "Diana Prince", 88
+[
+    {
+        "id" : 123001,
+        "name" : "Alice Smith",
+        "score" : 75
+    },
+    {
+        "id" : 123002,
+        "name" : "Bob Jones",
+        "score" : 32
+    },
+    {
+        "id" : 123003,
+        "name" : "Charlie Brown",
+        "score" : 55
+    },
+    {
+        "id" : 123004,
+        "name" : "Diana Prince",
+        "score": 88
+    }
+]

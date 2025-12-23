@@ -17,12 +17,13 @@ def load_data():
         for row in reader: 
             # simple format: ID, Name, Score 
             students.append({'id': row[0], 'name': row[1], 'score': int(row[2])}) 
-    print("Data loaded successfully.") 
+    print("Data loaded successfully.")
+    return
  
 def save_data(): 
     """Saves student data to CSV file.""" 
     # BUG WARNING: Check the file mode carefully
-    with open(STUDENT_FILE, 'r') as file:  
+    with open(STUDENT_FILE, 'w') as file:  
         writer = csv.writer(file) 
         for student in students: 
             writer.writerow([student['id'], student['name'], student['score']]) 

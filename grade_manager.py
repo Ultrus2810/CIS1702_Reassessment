@@ -45,7 +45,10 @@ def add_student(data):
     name = input("Enter Student Name: ")
     
     # BUG WARNING: No error handling if user types "fifty" instead of 50
-    score = int(input("Enter Score (0-100): "))
+    try:
+        score = int(input("Enter Score (0-100): "))
+    except:
+        print("Invalid Score")
 
     new_student = {'id': s_id, 'name': name, 'score': score}
     data.append(new_student)

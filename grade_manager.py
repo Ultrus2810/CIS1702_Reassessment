@@ -11,9 +11,9 @@ def load_data(filename):
         students = []
     # If file doesn't exist, we should probably handle that... currently it crashes. FIXED
         with open(filename, "r") as file:
-            reader = csv.reader(file) 
-            for row in reader: 
-             # simple format: ID, Name, Score 
+            reader = csv.reader(file)
+            for row in reader:
+             # simple format: ID, Name, Score
                 students.append({'id': row[0], 'name': row[1], 'score': int(row[2])})
         print("Data loaded successfully.")
         return students
@@ -22,17 +22,15 @@ def load_data(filename):
 
 def save_data(data):
     """Saves student data to CSV file.""" 
-    # BUG WARNING: Check the file mode carefully. FIXED
-    with open("STUDENT_FILE.csv", 'w') as file:  
-        writer = csv.writer(file) 
-        for student in data: 
-            writer.writerow([student['id'], student['name'], student['score']]) 
+    with open("STUDENT_FILE.csv", 'w') as file:
+        writer = csv.writer(file)
+        for student in data:
+            writer.writerow([student['id'], student['name'], student['score']])
     print("Data saved.")
 
 
 def determine_grade(score):
-    """Returns Pass or Fail based on score.""" 
-    # BUG WARNING: Something is wrong with this logic. FIXED
+    """Returns Pass or Fail based on score."""
     if score > 40:
         return "Pass"
     else:
@@ -45,10 +43,12 @@ def add_student(data):
     name = input("Enter Student Name: ")
     
     # BUG WARNING: No error handling if user types "fifty" instead of 50
-    try:
-        score = int(input("Enter Score (0-100): "))
-    except:
-        print("Invalid Score")
+    while True:
+        try:
+            score = int(input("Enter Score (0-100): "))
+            break
+        except:
+            print("Invalid Score")
 
     new_student = {'id': s_id, 'name': name, 'score': score}
     data.append(new_student)
@@ -67,10 +67,11 @@ def view_students(data):
 
 def main_menu(data):
     while True:
-        print("\n=== GRADE MANAGER v0.1 (BETA) ===")
+        print("\n=== GRADE MANAGER v1.0 (BETA) ===")
         print("1. View Students")
         print("2. Add Student")
-        print("3. Save & Exit")
+        print("3. View Module Statistics")
+        print("4. Save & Exit")
         
         choice = input("Select option: ")
         
@@ -79,6 +80,9 @@ def main_menu(data):
         elif choice == '2':
             add_student(data)
         elif choice == '3':
+            print("placeholder")
+        elif choice == '4':
+            save_data(data)
             print("Goodbye!")
             break
         else:

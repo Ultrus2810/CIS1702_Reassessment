@@ -42,7 +42,6 @@ def add_student(data):
     s_id = input("Enter Student ID: ")
     name = input("Enter Student Name: ")
     
-    # BUG WARNING: No error handling if user types "fifty" instead of 50
     while True:
         try:
             score = int(input("Enter Score (0-100): "))
@@ -53,7 +52,6 @@ def add_student(data):
     new_student = {'id': s_id, 'name': name, 'score': score}
     data.append(new_student)
     
-    # Note: We are adding to the list, but are we saving it?
     print(f"Student {name} added!")
 
 def view_students(data):
@@ -64,6 +62,16 @@ def view_students(data):
     for s in data:
         result = determine_grade(s['score'])
         print(f"{s['id']:<10} {s['name']:<20} {s['score']:<10} {result:<10}")
+
+def module_statistics(data):
+    score_list = []
+    total = 0
+    for score in data:
+        score_list.append(score["score"])
+    for number in range(len(score_list)):
+        total += score_list[number]
+    total /= len(score_list)
+    print(total)
 
 def main_menu(data):
     while True:
@@ -80,6 +88,7 @@ def main_menu(data):
         elif choice == '2':
             add_student(data)
         elif choice == '3':
+            module_statistics(data)
             print("placeholder")
         elif choice == '4':
             save_data(data)

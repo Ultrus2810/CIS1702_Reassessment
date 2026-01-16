@@ -65,6 +65,8 @@ def view_students(data):
 
 def module_statistics(data):
     score_list = []
+    highest_score = []
+    lowest_score = []
     total = 0
     for score in data:
         score_list.append(score["score"])
@@ -72,6 +74,13 @@ def module_statistics(data):
         total += score_list[number]
     total /= len(score_list)
     print(total)
+    for i in range(len(score_list)):
+        if score_list[i] < i:
+            lowest_score.append(score_list[i])
+        elif i > i:
+            highest_score.append(score_list[i])
+        else:
+            print("Equal")
 
 def main_menu(data):
     while True:

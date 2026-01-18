@@ -20,13 +20,16 @@ def load_data(filename):
     except:
         print("Error in loading")
 
-def save_data(data):
+def save_data(filename, data):
     """Saves student data to CSV file.""" 
-    with open("STUDENT_FILE.csv", 'w') as file:
-        writer = csv.writer(file)
-        for student in data:
-            writer.writerow([student['id'], student['name'], student['score']])
-    print("Data saved.")
+    try:
+        with open(f"{filename}", 'w') as file:
+            writer = csv.writer(file)
+            for student in data:
+                writer.writerow([student['id'], student['name'], student['score']])
+        print("Data saved.")
+    except:
+        print("Error in saving")
 
 
 def determine_grade(score):
@@ -67,24 +70,47 @@ def module_statistics(data):
     score_list = []
     highest_score = []
     lowest_score = []
+    temp1 = []
+    temp2 = []
     total = 0
     for score in data:
         score_list.append(score["score"])
     for number in range(len(score_list)):
         total += score_list[number]
     total /= len(score_list)
-    print(total)
+    print(f" The average score is {total}")
     for i in range(len(score_list)):
-        if score_list[i] < i:
+        if score_list[i] < 50:
             lowest_score.append(score_list[i])
-        elif i > i:
-            highest_score.append(score_list[i])
         else:
-            print("Equal")
+            highest_score.append(score_list[i]) 
+    for j in range(len(lowest_score)):
+        while len(lowest_score) > 1:
+            if lowest_score[j] < lowest_score[j + 1]:
+                lowest_score.remove(lowest_score[j + 1])
+            else:
+                lowest_score.remove(lowest_score[j])
+    for j in range(len(highest_score)):
+        while len(highest_score) > 1:
+            if highest_score[j] > highest_score[j + 1]:
+                highest_score.remove(highest_score[j + 1])
+            else:
+                highest_score.remove(highest_score[j])
+    temp1.append(next(student for student in data if student['score'] == lowest_score[0]))
+    for s in temp1:
+        print(f"{s['name']} has the lowest score of {s['score']}")
+    temp2.append(next(student for student in data if student['score'] == highest_score[0]))
+    for s in temp2:
+        print(f"{s['name']} has the highest score of {s['score']}")
+    for n in range(len(temp2)):
+        temp1.append(temp2[n])
+    temp1.append(datetime.now())
+    save_data("module_report.txt", temp1)
+
 
 def main_menu(data):
     while True:
-        print("\n=== GRADE MANAGER v1.0 (BETA) ===")
+        print("\n=== GRADE MANAGER v1.1 ===")
         print("1. View Students")
         print("2. Add Student")
         print("3. View Module Statistics")
@@ -100,7 +126,7 @@ def main_menu(data):
             module_statistics(data)
             print("placeholder")
         elif choice == '4':
-            save_data(data)
+            save_data("STUDENT_FILE.csv", data)
             print("Goodbye!")
             break
         else:

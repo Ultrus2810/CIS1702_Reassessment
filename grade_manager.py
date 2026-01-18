@@ -124,7 +124,6 @@ def main_menu(data):
             add_student(data)
         elif choice == '3':
             module_statistics(data)
-            print("placeholder")
         elif choice == '4':
             save_data("STUDENT_FILE.csv", data)
             print("Goodbye!")

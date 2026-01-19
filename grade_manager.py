@@ -1,6 +1,6 @@
 import csv
 import os
-import datetime
+from datetime import datetime
  
 
 def load_data(filename): 
@@ -104,7 +104,7 @@ def module_statistics(data):
         print(f"{s['name']} has the highest score of {s['score']}")
     for n in range(len(temp2)):
         temp1.append(temp2[n])
-    time_stamp = datetime.datetime.now()
+    time_stamp = datetime.now()
     new_student = {'id': time_stamp, 'name': 'Timestamp', 'score': 'Null'}
     temp1.append(new_student)
     save_data("module_report.txt", temp1)
